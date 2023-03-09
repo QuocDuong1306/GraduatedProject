@@ -11,6 +11,8 @@ class Factory(models.Model):
     location = fields.Char(string='Location',required=True)
     phone = fields.Char(string='Phone')
     email = fields.Char(string='Email')
+    site_area = fields.Integer(string='Site Area (m2)')
+    number_employee = fields.Integer(string='Number of Employee')
     machine_ids = fields.One2many('machine', 'factory_id', string='Machine List')
 
     @api.model

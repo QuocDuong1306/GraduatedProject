@@ -55,9 +55,9 @@
                     <field name="machine_serial"/>
                     <field name="factory_id"/>
                     <field name="name"/>
-                    <field name="floor"/>
-                    <field name="location_x"/>
-                    <field name="location_y"/>
+                    <field name="floor" />
+                    <field name="location_x" />
+                    <field name="location_y" />
                 </tree>
             </field>
         </record>
