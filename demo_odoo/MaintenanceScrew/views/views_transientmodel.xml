@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_import_cancel" model="ir.ui.view">
+            <field name="name">view.import.cancel</field>
+            <field name="model">import.cancel</field>
+            <field name="arch" type="xml">
+                <form string="Cancel task">
+                    <group>
+                        <field name="reason" string="Reason"/>
+                    </group>
+                    <footer>
+                        <button string="Confirm" name="confirm_cancel_task" type="object" default_focus="1"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_export_cancel" model="ir.ui.view">
+            <field name="name">view.export.cancel</field>
+            <field name="model">export.cancel</field>
+            <field name="arch" type="xml">
+                <form string="Cancel task">
+                    <group>
+                        <field name="reason" string="Reason"/>
+                    </group>
+                    <footer>
+                        <button string="Confirm" name="confirm_cancel_task" type="object" default_focus="1"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

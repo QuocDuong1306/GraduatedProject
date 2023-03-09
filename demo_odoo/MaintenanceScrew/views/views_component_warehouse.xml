@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for component_warehouse -->
+        <record id="view_component_warehouse_form" model="ir.ui.view">
+            <field name="name">component.warehouse.form</field>
+            <field name="model">component.warehouse</field>
+            <field name="arch" type="xml">
+                <form string="Component Warehouse">
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <label for="warehouse_id" string="ID Warehouse"/>
+                                <h1>
+                                    <field name="warehouse_id"/>
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <label for="component_id" string="ID Component"/>
+                                <h1>
+                                    <field name="component_id"/>
+                                </h1>
+                                <label for="component_serial" string="Serial of Component" readonly="True"/>
+                                <h3>
+                                    <field name="component_serial"/>
+                                </h3>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                                <field name="unit"/>
+                                <field name="reorder_min"/>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for component.warehouse -->
+        <record id="view_component_warehouse_tree" model="ir.ui.view">
+            <field name="name">component.warehouse.tree</field>
+            <field name="model">component.warehouse</field>
+            <field name="arch" type="xml">
+                <tree string="Component Warehouse">
+                    <field name="warehouse_id"/>
+                    <field name="component_id"/>
+                    <field name="component_serial"/>
+                    <field name="amount"/>
+                    <field name="unit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_component_warehouse_search" model="ir.ui.view">
+            <field name="name">component.warehouse.search</field>
+            <field name="model">component.warehouse</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="warehouse_id" string="ID Warehouse"/>
+                    <field name="component_serial" string="Serial Component"/>
+                    <field name="component_id" string="ID Component"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Warehouse" name="warehouse" domain="[]" context="{'group_by':'warehouse_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="component_warehouse_action" model="ir.actions.act_window">
+            <field name="name">Component Warehouse</field>
+            <field name="res_model">component.warehouse</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_warehouse': 1}</field>
+        </record>
+        <menuitem id="menu_component_warehouse_view" name="Storing Component" action="component_warehouse_action"
+                  sequence="2"
+                  parent="menu_warehouse" groups="base.group_user"/>
+    </data>
+</odoo>

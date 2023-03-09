@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+
+    <!-- Form view for employee -->
+    <record id="view_employee_form" model="ir.ui.view">
+      <field name="name">employee.form</field>
+      <field name="model">employee</field>
+      <field name="arch" type="xml">
+        <form string="Employee">
+          <sheet>
+              <group>
+                  <group>
+                          <div class="oe_title">
+                            <label for="employee_id" string="ID Employee" class="oe_edit_only"/>
+                            <h1><field name="employee_id" readonly="True" /></h1>
+<!--                       readonly="True"       placeholder="...-->
+                            <label for="name" string="Name"/>
+                            <h3><field name="name"/></h3>
+                            <label for="position" string="Position"/>
+                            <h3><field name="position"/></h3>
+                          </div>
+                  </group>
+                  <group>
+                    <field name="image" widget="image" options="{'preview_image': 'image_medium'}"/>
+                  </group>
+              </group>
+              <group>
+                 <field name="birthday" />
+                 <field name="email" />
+              </group>
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+    <!-- Tree view for employee -->
+    <record id="view_employee_tree" model="ir.ui.view">
+      <field name="name">employee.tree</field>
+      <field name="model">employee</field>
+      <field name="arch" type="xml">
+        <tree string="Employees">
+          <field name="employee_id"/>
+          <field name="name"/>
+          <field name="position"/>
+          <field name="email"/>
+<!--          <field name="factory_id"/>-->
+        </tree>
+      </field>
+    </record>
+    <record id="employee_action" model="ir.actions.act_window">
+          <field name="name">Emloyee</field>
+          <field name="res_model">employee</field>
+          <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem  id="menu" name="Maintenance Screw App" groups="base.group_user"/>
+    <menuitem id="menu_information" name="Information"  parent="menu" groups="base.group_user" />
+    <menuitem id="menu_employee_view" name="Employees" action="employee_action" parent="menu_information" groups="base.group_user" />
+  </data>
+</odoo>

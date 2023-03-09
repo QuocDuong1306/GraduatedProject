@@ -1,0 +1,19 @@
+<!-- <button name="action_confirm" type="object" string="Confirm" class="btn-primary"-->
+<!--                                invisible="['|', ('status', '!=', 'new'), ('import_id', '=', 'New')]"-->
+<!--                                groups="MaintenanceScrew.group_employee_leader"-->
+<!--                                confirm="Are you sure to confirm?"/>-->
+
+
+<!-- Original-->
+     <button name="action_confirm"
+                                type="object"
+                                string="Confirm"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|', ('status', '!=', 'new'), ('import_id', '=', 'New')], 'groups': 'MaintenanceScrew.group_employee_leader'}"
+                                confirm="Are you sure to confirm?"/>
+                        <button name="action_done"
+                                string="Done"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|', ('status', '!=', 'confirmed'), ('import_id', '=', 'New')], 'groups': 'MaintenanceScrew.group_employee_leader,MaintenanceScrew.group_employee_warehouse_staff'}"
+                                confirm="Are you sure you want to mark this record as done?"/>

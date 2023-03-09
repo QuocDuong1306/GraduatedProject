@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Export History Form View -->
+        <record id="view_export_history_form" model="ir.ui.view">
+            <field name="name">export.history.form</field>
+            <field name="model">export.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm_export"
+                                type="object"
+                                string="Confirm"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|', ('status', '!=', 'new'), ('export_id', '=', 'New')]}"
+                                groups="MaintenanceScrew.group_employee_leader"
+                                confirm="Are you sure to confirm?"/>
+                        <button name="action_done_export"
+                                string="Done"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|', ('status', '!=', 'confirmed'), ('export_id', '=', 'New')]}"
+                                groups="MaintenanceScrew.group_employee_leader,MaintenanceScrew.group_employee_warehouse_staff"
+                                confirm="Are you sure you want to mark this record as done?"/>
+                        <button name="action_cancel_export"
+                                string="Cancel"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|','|', ('status', '=', 'done'), ('export_id', '=', 'New'),('status', '=', 'cancel')]}"
+                                confirm="Are you sure you want to cancel this record?"/>
+                        <field name="status" widget="statusbar" statusbar_visible="new,confirmed,done,cancel"/>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <label for="export_id" string="ID Export"/>
+                                <h1>
+                                    <field name="export_id" readonly="True"/>
+                                </h1>
+                            </group>
+                            <group>
+                                <div class="oe_title">
+                                    <!--                       readonly="True"       placeholder="...-->
+                                    <label for="warehouse_id" string="ID Warehouse"/>
+                                    <h3>
+                                        <field name="warehouse_id"/>
+                                    </h3>
+                                    <label for="factory_id" string="ID Factory"/>
+                                    <h3>
+                                        <field name="factory_id"/>
+                                    </h3>
+                                    <label for="name" string="Name of Factory"/>
+                                    <h3>
+                                        <field name="name"/>
+                                    </h3>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="export_date" string="Export Completed Date"/>
+                                <field name="supplier" string="Supplier"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="user_created" string="Created By"/>
+                            <field name="user_confirmed" string="Confirmed By"/>
+                            <field name="user_done" string="Done By"/>
+                            <field name="user_cancel" string="Cancel By"/>
+                        </group>
+                        <group>
+                            <field name="description" string="Write your description"/>
+                        </group>
+                        <notebook>
+                            <page string="Export Lines">
+                                <field name="export_line_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="component_id"/>
+                                        <field name="status"/>
+                                        <field name="component_serial"/>
+                                        <field name="export_amount"/>
+                                        <field name="warehouse_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Export History Tree View -->
+        <record id="view_export_history_tree" model="ir.ui.view">
+            <field name="name">export.history.tree</field>
+            <field name="model">export.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="export_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="factory_id"/>
+                    <field name="export_date"/>
+                    <field name="status"/>
+                    <field name="user_created"/>
+                    <field name="user_confirmed"/>
+                    <field name="user_done"/>
+                    <field name="supplier"/>
+                </tree>
+            </field>
+        </record>
+        <!--        Search cho export history-->
+        <record id="view_export_history_search" model="ir.ui.view">
+            <field name="name">export.history.search</field>
+            <field name="model">export.history</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Search" >
+                    <field name="warehouse_id" string="ID Warehouse"/>
+                    <field name="status" string="Status"/>
+                    <field name="export_date" string="Date Export"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Export Date" name="export" domain="[]" context="{'group_by':'export_date:day'}"/>
+                        <filter string="Warehouse" name="warehouse" domain="[]" context="{'group_by':'warehouse_id'}"/>
+                        <filter string="State" name="status" domain="[]" context="{'group_by':'status'}"/>
+                   </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Export History Line Tree View -->
+    <record id="view_export_history_line_tree" model="ir.ui.view">
+        <field name="name">export.history.line.tree</field>
+        <field name="model">export.history.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="export_id"/>
+                <field name="component_id"/>
+                <field name="component_serial"/>
+                <field name="status"/>
+                <field name="export_amount"/>
+                <field name="warehouse_id"/>
+                <field name="export_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for ExportHistory -->
+    <record id="action_export_history" model="ir.actions.act_window">
+        <field name="name">Export History</field>
+        <field name="res_model">export.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_export': 1}</field>
+    </record>
+
+    <!-- Action for ExportHistoryLine -->
+    <record id="action_export_history_line" model="ir.actions.act_window">
+        <field name="name">export History Line</field>
+        <field name="res_model">export.history.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu for Export History -->
+    <menuitem id="menu_export_history" name="Export History" parent="menu_warehouse" sequence="4"
+              action="action_export_history" groups="base.group_user"/>
+
+    <!-- Menu for Export History Line -->
+<!--    <menuitem id="menu_export_history_line" name="Export Line" parent="menu_history"-->
+<!--              sequence="10" action="action_export_history_line" groups="base.group_user"/>-->
+
+
+</data>
+        </odoo>

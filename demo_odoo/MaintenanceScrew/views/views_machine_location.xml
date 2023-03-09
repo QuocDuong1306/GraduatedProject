@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for machine_location -->
+        <record id="view_machine_location_form" model="ir.ui.view">
+            <field name="name">machine.location.form</field>
+            <field name="model">machine.location</field>
+            <field name="arch" type="xml">
+                <form string="Machine location">
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <label for="machine_id" string="ID Machine" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="machine_id" />
+                                </h1>
+                                <label for="machine_serial" string="Machine Serial" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="machine_serial" readonly="True"/>
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <label for="factory_id" string="ID Factory"/>
+                                <h3>
+                                    <field name="factory_id"/>
+                                </h3>
+                                <label for="name" string="Name of Factory"/>
+                                <h3>
+                                    <field name="name"/>
+                                </h3>
+                                <label for="floor" string="Floor"/>
+                                <h3>
+                                    <field name="floor"/>
+                                </h3>
+                            </group>
+                            <group>
+                                <field name="location_x"/>
+                                <field name="location_y"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for machine_location -->
+        <record id="view_machine_location_tree" model="ir.ui.view">
+            <field name="name">machine.location.tree</field>
+            <field name="model">machine.location</field>
+            <field name="arch" type="xml">
+                <tree string="Machine location">
+                    <field name="machine_id"/>
+                    <field name="machine_serial"/>
+                    <field name="factory_id"/>
+                    <field name="name"/>
+                    <field name="floor"/>
+                    <field name="location_x"/>
+                    <field name="location_y"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_machine_location_search" model="ir.ui.view">
+            <field name="name">machine.location.search</field>
+            <field name="model">machine.location</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Factories Search">
+                    <field name="machine_serial" string="Machine Serial"/>
+                    <field name="factory_id" string="ID Factory"/>
+                    <field name="name" string="Name of Factory"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Factory" name="factory" domain="[]" context="{'group_by':'factory_id'}"/>
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<record id="machine_location_action" model="ir.actions.act_window">
+            <field name="name">MachineLocation</field>
+            <field name="res_model">machine.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_factory': 1}</field>
+        </record>
+        <menuitem id="menu_machine_location_view" name="Location Machine" action="machine_location_action" parent="menu_factory"
+                  sequence="2"
+                  groups="base.group_user"/>
+
+    </data>
+</odoo>

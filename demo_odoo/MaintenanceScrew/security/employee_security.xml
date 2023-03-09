@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_category_maintenance" model="ir.module.category">
+            <field name="name">Maintenance</field>
+            <field name="sequence">1</field>
+        </record>
+        <!-- Define groups -->
+        <record model="res.groups" id="group_employee_warehouse_staff">
+            <field name="name">Employee Warehouse Staff</field>
+            <field name="category_id" ref="module_category_maintenance"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_employee_maintenance_staff">
+            <field name="name">Employee Maintenance Staff</field>
+            <field name="category_id" ref="module_category_maintenance"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_employee_leader">
+            <field name="name">Employee Leader</field>
+            <field name="category_id" ref="module_category_maintenance"/>
+            <field name="implied_ids"
+                   eval="[(4, ref('group_employee_warehouse_staff')), (4, ref('group_employee_maintenance_staff'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_employee_manager">
+            <field name="name">Employee Manager</field>
+            <field name="category_id" ref="module_category_maintenance"/>
+            <field name="implied_ids" eval="[(4, ref('group_employee_leader'))]"/>
+        </record>
+    </data>
+    <data>
+<!--        <record id="import_history_rule" model="ir.rule">-->
+<!--            <field name="name">Import History Record Rule</field>-->
+<!--            <field name="model_id" ref="model_import_history"/>-->
+<!--            <field name="domain_force">[('import_id', '=', 'New')]</field>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="True"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--        </record>-->
+
+
+    </data>
+    <!--    <data>-->
+    <!--        <record model="ir.rule" id="rule_confirm_button">-->
+    <!--            <field name="name">Confirm Button Rule</field>-->
+    <!--            <field name="model_id" ref="model_import_history"/>-->
+    <!--            <field name="domain_force">[('status', '=', 'new')]</field>-->
+    <!--            <field name="groups" eval="[(4, ref('import_history.group_employee_leader'))]"/>-->
+    <!--            <field name="perm_create" eval="False"/>-->
+    <!--            <field name="perm_read" eval="True"/>-->
+    <!--            <field name="perm_write" eval="False"/>-->
+    <!--            <field name="perm_unlink" eval="False"/>-->
+    <!--        </record>-->
+
+    <!--        <record model="ir.rule" id="rule_done_button">-->
+    <!--            <field name="name">Done Button Rule</field>-->
+    <!--            <field name="model_id" ref="model_import_history"/>-->
+    <!--            <field name="domain_force">[('status', '=', 'confirmed')]</field>-->
+    <!--            <field name="groups"-->
+    <!--                   eval="[(4, ref('import_history.group_employee_leader')), (4, ref('import_history.group_employee_warehouse_staff'))]"/>-->
+    <!--            <field name="perm_create" eval="False"/>-->
+    <!--            <field name="perm_read" eval="True"/>-->
+    <!--            <field name="perm_write" eval="False"/>-->
+    <!--            <field name="perm_unlink" eval="False"/>-->
+    <!--        </record>-->
+
+    <!--    </data>-->
+</odoo>
+
+
+        <!--  <record model="ir.rule" id="rule_employee_staff">-->
+        <!--    <field name="name">Staff user can view own record</field>-->
+        <!--    <field name="model_id" ref="model_employee"/>-->
+        <!--    <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+        <!--    <field name="groups" eval="[(4, ref('group_employee_staff'))]"/>-->
+        <!--  </record>-->
+
+        <!--  <record model="ir.rule" id="rule_employee_leader">-->
+        <!--    <field name="name">Leader user can view own record and staff's record</field>-->
+        <!--    <field name="model_id" ref="model_employee"/>-->
+        <!--    <field name="domain_force">['|', ('user_id', '=', user.id), ('position', '=', 'staff')]</field>-->
+        <!--    <field name="groups" eval="[(4, ref('group_employee_leader'))]"/>-->
+        <!--  </record>-->
+
+        <!--  <record model="ir.rule" id="rule_employee_manager">-->
+        <!--    <field name="name">Manager user can view all records</field>-->
+        <!--    <field name="model_id" ref="model_employee"/>-->
+        <!--    <field name="groups" eval="[(4, ref('group_employee_manager'))]"/>-->
+        <!--  </record>-->
+

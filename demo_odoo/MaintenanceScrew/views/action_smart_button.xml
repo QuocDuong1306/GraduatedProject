@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="action_component_by_warehouse" model="ir.actions.act_window">
+            <field name="name">Component</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">component.warehouse</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('warehouse_id','=',active_id)]</field>
+        </record>
+
+         <record id="action_import_by_warehouse" model="ir.actions.act_window">
+            <field name="name">Import History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">import.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('warehouse_id','=',active_id)]</field>
+        </record>
+
+<!--        action export cho smart button ở form warehouse-->
+        <record id="action_export_by_warehouse" model="ir.actions.act_window">
+            <field name="name">Export</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">export.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('warehouse_id','=',active_id)]</field>
+        </record>
+
+        <record id="action_warehouse_by_component" model="ir.actions.act_window">
+            <field name="name">In Warehouse</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">component.warehouse</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('component_id','=',active_id)]</field>
+        </record>
+
+        <record id="action_location_by_machine" model="ir.actions.act_window">
+            <field name="name">Location</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">machine.location</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('machine_id','=',active_id)]</field>
+        </record>
+
+        <record id="action_component_by_machine" model="ir.actions.act_window">
+            <field name="name">Components</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">component</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('model_id','in',active_id)]</field>
+        </record>
+
+        <record id="action_maintenance_by_machine" model="ir.actions.act_window">
+            <field name="name">Maintenance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('machine_id','=',active_id)]</field>
+        </record>
+    </data>
+</odoo>

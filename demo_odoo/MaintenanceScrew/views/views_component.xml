@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for component -->
+        <record id="view_component_form" model="ir.ui.view">
+            <field name="name">component.form</field>
+            <field name="model">component</field>
+            <field name="arch" type="xml">
+                <form string="Component">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(action_warehouse_by_component)d" string="In Warehouse" type="action"
+                                    class="oe_stat_button" icon="fa-list"/>
+                        </div>
+                        <group>
+                            <group>
+                                <div class="oe_title">
+                                    <label for="component_id" string="ID Component" class="oe_edit_only"/>
+                                    <h1>
+                                        <field name="component_id" readonly="True"/>
+                                    </h1>
+                                    <!--                       readonly="True"       placeholder="...-->
+                                    <label for="component_serial" string="Serial"/>
+                                    <h3>
+                                        <field name="component_serial"/>
+                                    </h3>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="unit" string="Unit"/>
+                                <field name="manufacturer" string="Manufacturer"/>
+                            </group>
+                            <group>
+                                <field name="model_id" string="Models"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" string="Write your description about this Component"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for component -->
+        <record id="view_component_tree" model="ir.ui.view">
+            <field name="name">component.tree</field>
+            <field name="model">component</field>
+            <field name="arch" type="xml">
+                <tree string="Component">
+                    <field name="component_id"/>
+                    <field name="component_serial"/>
+                    <field name="description"/>
+                    <field name="model_id" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Kanban view for component -->
+        <record id="view_component_kanban" model="ir.ui.view">
+            <field name="name">component.kanban</field>
+            <field name="model">component</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="component_id"/>
+                    <field name="component_serial"/>
+                    <field name="model_id"/>
+<!--                    <field name="photo"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+<!--                                <div class="o_kanban_image_fill_left d-none d-md-block"-->
+<!--                                     t-attf-style="background-image:url('#{kanban_image('component', 'photo', record.id.raw_value,placeholder)}'); background-size: 135px;">-->
+<!--                                </div>-->
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top mb-0">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <li>ID: [<field name="component_id"/>]
+                                                </li>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <li>Serial: [<field name="component_serial"/>]
+                                        </li>
+                                        <li>Description:
+                                            <field name="description"/>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_component_search" model="ir.ui.view">
+            <field name="name">component.search</field>
+            <field name="model">component</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Component Search">
+                    <field name="component_serial" string="Serial"/>
+                    <field name="component_id" string="ID Component"/>
+                    <field name="model_id" string="ID Model"/>
+                    <field name="description" string="Description"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="component_action" model="ir.actions.act_window">
+            <field name="name">Component</field>
+            <field name="res_model">component</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_component_view" name="Component" action="component_action" parent="menu_machine"
+                  sequence="2"
+                  groups="base.group_user"/>
+
+
+
+    </data>
+</odoo>
