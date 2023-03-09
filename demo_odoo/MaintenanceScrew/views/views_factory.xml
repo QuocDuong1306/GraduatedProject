@@ -26,10 +26,12 @@
                                 <h3>
                                     <field name="location"/>
                                 </h3>
+                                <field name="site_area"/>
                             </group>
                             <group>
                                 <field name="phone"/>
                                 <field name="email"/>
+                                <field name="number_employee"/>
                             </group>
                         </group>
                     </sheet>
@@ -46,6 +48,8 @@
                     <field name="factory_id"/>
                     <field name="name"/>
                     <field name="location"/>
+                    <field name="site_area"/>
+                    <field name="number_employee"/>
                     <field name="email"/>
                     <field name="phone"/>
                 </tree>

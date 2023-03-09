@@ -10,12 +10,12 @@ class Machine(models.Model):
 
     machine_id = fields.Char(string='Machine ID', required=True, copy=False, readonly=True,
                               default=lambda self: _('New'))
-    model_id = fields.Many2one('model',string='Machine Model ID', required=True)
+    model_id = fields.Many2one('model',string='Model', required=True)
     factory_id = fields.Many2one('factory', string='Factory', required=True)
     name = fields.Char(related='factory_id.name', string='Name of factory', store=True,readonly=True)
     machine_serial = fields.Char(string='Machine Serial',required=True)
     date_added = fields.Date(string='Date Added',required=True)
-    qr_code = fields.Binary(string='QR Code',required=True)
+    qr_code = fields.Binary(string='QR Code')
     # manufacturer = fields.Char(string='Manufacturer')
     machine_status = fields.Selection([
         ('active', 'Active'),

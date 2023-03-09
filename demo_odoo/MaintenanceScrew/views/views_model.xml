@@ -243,7 +243,7 @@
             <field name="name">Model</field>
             <field name="res_model">model</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="context">{'search_default_group1': 1}</field>
+<!--            <field name="context">{'search_default_group1': 1}</field>-->
 
 
         </record>
