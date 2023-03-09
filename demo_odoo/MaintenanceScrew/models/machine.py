@@ -38,22 +38,15 @@ class MachineLocation(models.Model):
         machine_serial = fields.Char(related='machine_id.machine_serial', string='Machine serial', store=True,readonly=True)
         factory_id = fields.Char(related='machine_id.factory_id.factory_id', string='ID Factory', store=True,readonly=True)
         name = fields.Char(related='machine_id.factory_id.name', string='Name of Factory', store=True,readonly=True)
-        floor = fields.Integer(string='Floor', required=True)
-        location_x = fields.Integer(string='Location X', required=True)
-        location_y = fields.Integer(string='Location Y', required=True)
+        floor = fields.Integer(string='Floor', required=True,group_operator=False)
+        location_x = fields.Integer(string='Location X', required=True,group_operator=False)
+        location_y = fields.Integer(string='Location Y', required=True,group_operator=False)
 
 
         _sql_constraints = [
          ('unique_machine_location', 'unique(machine_id)', 'A machine location already exists for this machine.')]
 
-        @api.model
-        def create(self,vals):
-                a = self.env['machine.location'].search([('floor', '=', vals['floor']),('location_x','=',vals['location_x']),
-                                                             ('location_y','=',vals['location_y'])])
-                if a :
-                    raise UserError('This location is match with another machine.')
 
-                return super(MachineLocation, self).create(vals)
 
         # kiểm tra điều kiện khi sửa, nếu như nhập 1 thì kiểm tra 1 , nhập 2 thì kiểm tra 2, nhập 3 thì kiểm tra 3
         # def write(self, vals):

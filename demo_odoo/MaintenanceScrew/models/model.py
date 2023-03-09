@@ -67,7 +67,7 @@ class ModelList(models.Model):
     _rec_name = 'component_serial'
 
     model_name = fields.Many2one('model',string="Model",required=True)
-    no = fields.Integer(string='No',required=True,default=1)
+    no = fields.Integer(string='No',required=True,default=1,group_operator=False)
     component_serial = fields.Many2one('component',string='Component Serial',required=True)
     description = fields.Text (string='Description')
 
@@ -78,5 +78,5 @@ class ModelListPhoto(models.Model):
 
 
     model_name = fields.Many2one('model',string="Model",required=True)
-    no = fields.Integer(string='No',required=True,default=1)
+    no = fields.Integer(string='No',required=True,default=1,group_operator=False)
     image = fields.Binary(string='Image',required=True,attachment=True)
