@@ -34,10 +34,28 @@ class Maintenance(models.Model):
     factory_id = fields.Many2one('factory', string='Factory', required=True)
     machine_id = fields.Many2one('machine',string='Machine', required=True,domain="[('factory_id','=',factory_id)]")
     model_id = fields.Char(related='machine_id.model_id.model_name')
+    floor = fields.Integer(string="Floor",readonly=True)
+    location_x = fields.Integer(string="Floor",readonly=True)
+    location_y = fields.Integer(string="Floor",readonly=True)
     @api.onchange('factory_id')
     def check_machine_id(self):
-        if self['machine_id']:
-            self['machine_id'] = None
+        for rec in self:
+            if rec['machine_id']:
+                rec['machine_id'] = None
+                rec['floor'] = None
+                rec['location_x'] = None
+                rec['location_y'] = None
+
+    @api.onchange('machine_id')
+    def check_location(self):
+        for rec in self:
+            machine_location_id = rec.env['machine.location'].search([('machine_id','=',rec.machine_id.id)])
+            if machine_location_id:
+                # machine_location = rec.env['machine.location'].browse(machine_location_id)
+                rec['floor'] = machine_location_id['floor']
+                rec['location_x'] = machine_location_id['location_x']
+                rec['location_y'] = machine_location_id['location_y']
+            rec['component_ids'] = None
 
     @api.model
     def create(self, values):

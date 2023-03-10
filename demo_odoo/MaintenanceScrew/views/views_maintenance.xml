@@ -58,6 +58,22 @@
                                 <field name="datetime_finished" string="Time Finished"/>
                                 <field name="worktime" string="Worktime"/>
                             </group>
+                            <group>
+                                 <div class="oe_title">
+                                    <label for="floor" string="Floor"/>
+                                    <h3>
+                                        <field name="floor"/>
+                                    </h3>
+                                    <label for="location_x" string="Location X"/>
+                                    <h3>
+                                        <field name="location_x"/>
+                                    </h3>
+                                    <label for="location_y" string="Location Y"/>
+                                    <h3>
+                                        <field name="location_y"/>
+                                    </h3>
+                                </div>
+                            </group>
                         </group>
                         <group>
                             <field name="user_created" string="Created By"/>
