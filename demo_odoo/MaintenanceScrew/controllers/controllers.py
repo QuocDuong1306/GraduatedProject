@@ -24,7 +24,7 @@ class MachineAPI(http.Controller):
         return machine_data
 
 
-    @http.route('/api/machine_models', auth='public', methods=['GET'], type='json')
+    @http.route('/machine_models', auth='user', type='json')
     def get_machine_models_info(self, **kwargs):
         machine_models = request.env['machine'].sudo().search([])
         machine_models_data = []

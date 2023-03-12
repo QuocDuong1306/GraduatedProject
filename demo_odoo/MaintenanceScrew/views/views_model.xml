@@ -31,7 +31,7 @@
         <record id="model_category_action" model="ir.actions.act_window">
             <field name="name">Model Category</field>
             <field name="res_model">model.category</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree</field>
         </record>
         <menuitem id="menu_test_model" name="Testmodel" parent="menu" groups="base.group_user"/>
         <menuitem id="menu_model_category" name="Category" action="model_category_action" parent="menu_test_model"
@@ -82,7 +82,7 @@
         <record id="model_group_action" model="ir.actions.act_window">
             <field name="name">Model Group</field>
             <field name="res_model">model.group</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree</field>
             <field name="context">{'search_default_category': 1}</field>
         </record>
 
